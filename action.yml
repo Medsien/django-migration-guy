@@ -34,10 +34,13 @@ runs:
       id: changed-files
       uses: tj-actions/changed-files@v35
     - name: debug
-      run: echo ${{ steps.changed-files.outputs.any_changed }}
+      run: |
+        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          echo "$file was changed"
+        done
       shell: bash
     - name: Commit changes
-      if: steps.changed-files.outputs.any_changed == 'true'
+      # if: steps.changed-files.outputs.any_changed == 'true'
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Automatic Django migration merge
