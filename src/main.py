@@ -11,7 +11,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("django-migration-guy")
 
-APP_DIR = os.environ.get("apps_path", ".")
+APP_DIR = os.environ.get("APPS_PATH", ".")
 logger.debug(f"Working on path: {APP_DIR}")
 
 MIG_TEMPLATE = """# Auto-generated merge migration
