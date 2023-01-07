@@ -33,6 +33,9 @@ runs:
     - name: Check changed files
       id: changed-files
       uses: tj-actions/changed-files@v35
+    - name: debug
+      run: echo ${{ steps.changed-files.outputs.any_changed }}
+      shell: bash
     - name: Commit changes
       if: steps.changed-files.outputs.any_changed == 'true'
       uses: stefanzweifel/git-auto-commit-action@v4
