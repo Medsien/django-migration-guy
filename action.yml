@@ -27,3 +27,5 @@ runs:
       id: fix-migrations
       run: poetry run python src/main.py
       shell: bash
+    - name: Commit changes
+      uses: stefanzweifel/git-auto-commit-action@v4

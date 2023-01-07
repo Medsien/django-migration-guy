@@ -66,3 +66,5 @@ def run():
 
 if __name__ == "__main__":
     run()
+    with open("asd.txt", "w") as f:
+        f.write("new stuff")
