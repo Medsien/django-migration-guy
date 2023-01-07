@@ -25,5 +25,5 @@ runs:
       shell: bash
     - name: Fix migrations
       id: fix-migrations
-      run: python src/main.py
+      run: poetry run python src/main.py
       shell: bash
