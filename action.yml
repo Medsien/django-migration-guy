@@ -7,12 +7,10 @@ inputs:
     default: "."
 runs:
   using: 'composite'
-  defaults:
-    run:
-      shell: bash
   steps:
     - name: Install poetry
       run: pipx install poetry
+      shell: bash
     - name: Install Python
       uses: actions/setup-python@v4
       with:
@@ -20,9 +18,12 @@ runs:
         cache: 'poetry'
     - name: Install requirements
       run: poetry install --without dev --no-root
+      shell: bash
     - name: Pass Inputs to Shell
       run: |
             echo "APPS_PATH=${{ inputs.apps_path }}" >> $GITHUB_ENV
+      shell: bash
     - name: Fix migrations
       id: fix-migrations
       run: python src/main.py
+      shell: bash
