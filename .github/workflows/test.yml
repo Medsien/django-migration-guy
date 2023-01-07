@@ -1,0 +1,11 @@
+on:
+  workflow_dispatch:
+    inputs:
+      apps_path:
+        description: 'Apps path'
+        required: true
+jobs:
+  self-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./
