@@ -20,27 +20,13 @@ runs:
       run: poetry install --without dev --no-root
       shell: bash
     - name: Pass Inputs to Shell
-      run: |
-            echo "APPS_PATH=${{ inputs.apps_path }}" >> $GITHUB_ENV
+      run: echo "APPS_PATH=${{ inputs.apps_path }}" >> $GITHUB_ENV
       shell: bash
     - name: Fix migrations
       id: fix-migrations
       run: poetry run python src/main.py
       shell: bash
-    - name: check status
-      run: git status
-      shell: bash
-    - name: Check changed files
-      id: changed-files
-      uses: tj-actions/changed-files@v35
-    - name: debug
-      run: |
-        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-          echo "$file was changed"
-        done
-      shell: bash
     - name: Commit changes
-      # if: steps.changed-files.outputs.any_changed == 'true'
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Automatic Django migration merge
