@@ -67,4 +67,6 @@ def run():
 if __name__ == "__main__":
     run()
     with open("asd.txt", "w") as f:
-        f.write("new stuff")
+        import random
+
+        f.write("new stuff %s" % random.randint(0, 1000000))
