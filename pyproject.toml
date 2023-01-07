@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "django-migration-guy"
+version = "0.1.0"
+description = "A GitHub action to fix conflicting Django migrations."
+authors = ["Ulaş Özgüler <ulasozguler@gmail.com>"]
+readme = "README.md"
+packages = [{include = "django_migration_guy"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

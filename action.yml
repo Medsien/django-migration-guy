@@ -1,0 +1,28 @@
+name: 'Django Migration Guy Action'
+description: 'Fixes conflicting Django migrations.'
+inputs:
+  apps_path:
+    description: 'Path of Django apps in your repository.'
+    required: true
+    default: "."
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'  
+    - name: Install Poetry
+      run: pip install poetry==1.3.1
+      shell: bash
+    - name: Install requirements
+      run: poetry install
+      shell: bash
+    - name: Pass Inputs to Shell
+      run: |
+            echo "APPS_PATH=${{ inputs.apps_path }}" >> $GITHUB_ENV
+      shell: bash
+    - name: Fix migrations
+      id: fix-migrations
+      run: python src/main.py
+      shell: bash
