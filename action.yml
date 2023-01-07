@@ -1,0 +1,57 @@
+name: Django Migration Guy Action
+description: Fixes conflicting Django migrations.
+inputs:
+  apps_path:
+    description: Path of Django apps in your repository.
+    required: false
+    default: "."
+  strategy:
+    type: choice
+    description: Fix Strategy
+    options: 
+    - create_pr
+    - push
+    default: create_pr
+  labels:
+    description: A comma separated list of labels for pull request.
+    default: auto-migration
+runs:
+  using: composite
+  steps:
+    - name: Install poetry
+      run: pipx install poetry
+      shell: bash
+    - name: Install python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: poetry
+    - name: Install requirements
+      run: poetry install --without dev --no-root
+      shell: bash
+    - name: Pass inputs to shell
+      run: echo "APPS_PATH=${{ inputs.apps_path }}" >> $GITHUB_ENV
+      shell: bash
+    - name: Fix migrations
+      id: fix-migrations
+      run: poetry run python src/main.py
+      shell: bash
+    - name: Create pull request
+      if:  ${{ inputs.strategy == 'create_pr' }} 
+      uses: peter-evans/create-pull-request@v4
+      with:
+        commit-message: Automatic Django migration merge
+        committer: Django Migration Guy <not-a-person@web.com>
+        title: Automatic Django migration merge
+        body: ${{ steps.fix-migrations.outputs.pr_message }}
+        delete-branch: true
+        branch: auto/django-mig-merge
+        labels: ${{ inputs.labels }}
+        reviewers: ${{ github.actor }}
+    - name: Commit changes
+      if:  ${{ inputs.strategy == 'push' }} 
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Automatic Django migration merge
+        commit_user_name: Django Migration Guy
+        commit_user_email: not-a-person@web.com
