@@ -31,3 +31,4 @@ runs:
       with:
         commit_message: Automatic Django migration merge
         commit_user_name: Django Migration Guy
+        commit_user_email: my-github-actions-bot@example.org
