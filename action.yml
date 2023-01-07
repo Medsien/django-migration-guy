@@ -3,7 +3,6 @@ description: 'Fixes conflicting Django migrations.'
 inputs:
   apps_path:
     description: 'Path of Django apps in your repository.'
-    required: true
     default: "."
 runs:
   using: 'composite'
