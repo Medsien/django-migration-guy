@@ -1,6 +1,7 @@
 import json
 import os
 
-print(json.dumps(sorted(dict(os.environ)), indent=2))
+for key, val in sorted(dict(os.environ).items()):
+    print(f"{key} = {val}")
 
 print("files:", os.listdir("."))
