@@ -8,6 +8,7 @@ packages = [{include = "django_migration_guy"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+django-migration-checker = "^0.8.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.12.0"
