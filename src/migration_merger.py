@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
 def get_next_migration_name(migrations):
     number = int(sorted(migrations)[-1].split("_")[0])
     prefix = str(number + 1).zfill(4)
-    datestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    datestamp = datetime.now().strftime("%Y%m%d")
     return f"{prefix}_merge_auto_{datestamp}.py"
 
 
