@@ -40,7 +40,7 @@ runs:
         commit-message: Automatic Django migration merge
         committer: Django Migration Guy <not-a-person@web.com>
         title: Automatic Django migration merge
-        body: ${{ fix-migrations.outputs.pr_message }}
+        body: ${{ steps.fix-migrations.outputs.pr_message }}
     - name: Commit changes
       if:  ${{ inputs.strategy == 'push' }} 
       uses: stefanzweifel/git-auto-commit-action@v4
