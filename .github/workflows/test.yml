@@ -5,13 +5,13 @@ on:
         description: 'Apps path'
         required: true
         default: '.'
-    strategy:
-      type: choice
-      description: Create a PR with changes or push to current branch.
-      options: 
-      - create_pr
-      - push
-      default: create_pr
+      strategy:
+        type: choice
+        description: Create a PR with changes or push to current branch.
+        options: 
+        - create_pr
+        - push
+        default: create_pr
 jobs:
   self-test:
     runs-on: ubuntu-latest
