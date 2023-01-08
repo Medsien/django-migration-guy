@@ -70,21 +70,25 @@ runs:
     - name: Install poetry
       run: pipx install poetry
       shell: bash
+      working-directory: ${{github.action_path}}
     - name: Install python
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
         cache: poetry
+      working-directory: ${{github.action_path}}
     - name: Install requirements
       run: poetry install --without dev --no-root
       shell: bash
+      working-directory: ${{github.action_path}}
     - name: Pass inputs to shell
-      run: echo "APPS_PATH=${{ inputs.apps_path }}" >> $GITHUB_ENV
+      run: echo "APPS_PATH=${{github.workspace}}/${{ inputs.apps_path }}" >> $GITHUB_ENV
       shell: bash
     - name: Fix migrations
       id: fix-migrations
       run: poetry run python src/main.py
       shell: bash
+      working-directory: ${{github.action_path}}
     - name: Create pull request
       if:  ${{ inputs.strategy == 'create_pr' }} 
       uses: peter-evans/create-pull-request@v4
@@ -97,6 +101,7 @@ runs:
         branch: auto/django-mig-merge
         labels: ${{ inputs.labels }}
         reviewers: ${{ github.actor }}
+      working-directory: ${{github.action_path}}
     - name: Commit changes
       if:  ${{ inputs.strategy == 'push' }} 
       uses: stefanzweifel/git-auto-commit-action@v4
@@ -104,3 +109,4 @@ runs:
         commit_message: Automatic Django migration merge
         commit_user_name: Django Migration Guy
         commit_user_email: not-a-person@web.com
+      working-directory: ${{github.action_path}}
