@@ -27,7 +27,7 @@ def run():
     for app, conflicts in res:
         logger.info(f"Conflicts in '{app}'. Merging leaves: {','.join(conflicts)}")
         summary += f"Merged migrations of `{app}` app:\n"
-        summary += "\n".join([f"- {x}" for x in conflicts])
+        summary += "\n".join([f"- `{x}`" for x in conflicts])
         summary += "\n"
         filename = create_merge_migration_file(app, conflicts, APPS_PATH)
         logger.info(f"Created: {filename}")
