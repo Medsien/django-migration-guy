@@ -7,7 +7,7 @@ on:
         default: '.'
       strategy:
         type: choice
-        description: Fix Strategy
+        description: Strategy
         options: 
         - create_pr
         - push
