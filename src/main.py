@@ -3,6 +3,7 @@ import os
 
 from django_migration_checker import get_conflicts
 
+import github
 from migration_merger import create_merge_migration_file
 
 logging.basicConfig(
@@ -22,11 +23,16 @@ def run():
         logger.info("No conflicts detected.")
         return
 
+    pr_message = ""
     for app, conflicts in res:
-        logger.info(f"Conflicts in '{app}'")
-        logger.info(f"Merging leaves: {','.join(conflicts)}")
-        filename = create_merge_migration_file(app, conflicts, APPS_PATH)
-        logger.info(f"Created: {filename}")
+        logger.info(f"Conflicts in '{app}'. Merging leaves: {','.join(conflicts)}")
+        pr_message += f"Merged migrations of `{app}` app:\n"
+        pr_message += "\n".join([f"- {x}" for x in conflicts])
+        pr_message += "\n"
+        # filename = create_merge_migration_file(app, conflicts, APPS_PATH)
+        # logger.info(f"Created: {filename}")
+
+    github.add_output("pr_message", pr_message)
 
 
 if __name__ == "__main__":
