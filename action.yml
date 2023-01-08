@@ -1,12 +1,19 @@
-name: 'Django Migration Guy Action'
-description: 'Fixes conflicting Django migrations.'
+name: Django Migration Guy Action
+description: Fixes conflicting Django migrations.
 inputs:
   apps_path:
-    description: 'Path of Django apps in your repository.'
+    description: Path of Django apps in your repository.
     required: false
     default: "."
+  strategy:
+    type: choice
+    description: Create a PR with changes or push to current branch.
+    options: 
+    - create_pr
+    - push
+    default: create_pr
 runs:
-  using: 'composite'
+  using: composite
   steps:
     - name: Install poetry
       run: pipx install poetry
@@ -15,7 +22,7 @@ runs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
-        cache: 'poetry'
+        cache: poetry
     - name: Install requirements
       run: poetry install --without dev --no-root
       shell: bash
@@ -27,10 +34,12 @@ runs:
       run: poetry run python src/main.py
       shell: bash
     - name: Create pull request
+      if:  ${{ inputs.strategy == 'create_pr' }} 
       uses: peter-evans/create-pull-request@v4
-    # - name: Commit changes
-    #   uses: stefanzweifel/git-auto-commit-action@v4
-    #   with:
-    #     commit_message: Automatic Django migration merge
-    #     commit_user_name: Django Migration Guy
-    #     commit_user_email: not-a-person@web.com
+    - name: Commit changes
+      if:  ${{ inputs.strategy == 'push' }} 
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Automatic Django migration merge
+        commit_user_name: Django Migration Guy
+        commit_user_email: not-a-person@web.com
