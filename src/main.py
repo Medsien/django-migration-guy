@@ -29,8 +29,8 @@ def run():
         pr_message += f"Merged migrations of `{app}` app:\n"
         pr_message += "\n".join([f"- {x}" for x in conflicts])
         pr_message += "\n"
-        # filename = create_merge_migration_file(app, conflicts, APPS_PATH)
-        # logger.info(f"Created: {filename}")
+        filename = create_merge_migration_file(app, conflicts, APPS_PATH)
+        logger.info(f"Created: {filename}")
 
     github.add_output("pr_message", pr_message)
 
