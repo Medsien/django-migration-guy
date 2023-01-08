@@ -1,5 +1,9 @@
 name: Django Migration Guy Action
-description: Fixes conflicting Django migrations.
+description: A GitHub action to automatically fix multiple leaf errors of Django migrations.
+author: ulasozguler
+branding:
+  icon: 'align-center'
+  color: 'yellow'
 inputs:
   apps_path:
     description: Path of Django apps in your repository.
