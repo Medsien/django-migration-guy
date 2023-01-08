@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/django-migration-guy@v0.1.0
+      - uses: ulasozguler/django-migration-guy@v0.1.0
         with:
           apps_path: '.'
           strategy: 'create_pr'
@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/django-migration-guy@v0.1.0
+      - uses: ulasozguler/django-migration-guy@v0.1.0
         with:
           apps_path: ${{ inputs.apps_path }}
           strategy: ${{ inputs.strategy }}
