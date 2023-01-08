@@ -1,4 +1,4 @@
-name: Django Migration Guy Action
+name: Django Migration Guy
 description: A GitHub action to automatically fix multiple leaf errors of Django migrations.
 author: ulasozguler
 branding:
