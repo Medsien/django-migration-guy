@@ -22,6 +22,9 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: asd
+      shell: bash
+      run: ls -lah /home/runner/work/_actions/ulasozguler/django-migration-guy/develop
     - name: Dump GitHub context
       shell: bash
       env:
