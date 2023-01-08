@@ -44,6 +44,7 @@ runs:
         delete-branch: true
         branch: auto/django-mig-merge
         labels: auto-migration
+        reviewers: ${{ github.actor }}
     - name: Commit changes
       if:  ${{ inputs.strategy == 'push' }} 
       uses: stefanzweifel/git-auto-commit-action@v4
