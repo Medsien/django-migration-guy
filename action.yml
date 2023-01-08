@@ -22,6 +22,9 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: list all
+      shell: bash
+      run: ls -lah && pwd
     - name: Install poetry
       run: pipx install poetry
       shell: bash
