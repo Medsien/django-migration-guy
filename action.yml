@@ -7,7 +7,7 @@ inputs:
     default: "."
   strategy:
     type: choice
-    description: Create a PR with changes or push to current branch.
+    description: Fix Strategy
     options: 
     - create_pr
     - push
