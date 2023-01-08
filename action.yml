@@ -41,6 +41,8 @@ runs:
         committer: Django Migration Guy <not-a-person@web.com>
         title: Automatic Django migration merge
         body: ${{ steps.fix-migrations.outputs.pr_message }}
+        delete-branch: true
+        branch: auto/django-mig-merge
     - name: Commit changes
       if:  ${{ inputs.strategy == 'push' }} 
       uses: stefanzweifel/git-auto-commit-action@v4
