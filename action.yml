@@ -76,7 +76,6 @@ runs:
       with:
         python-version: '3.10'
         cache: poetry
-      working-directory: ${{github.action_path}}
     - name: Install requirements
       run: poetry install --without dev --no-root
       shell: bash
@@ -101,7 +100,6 @@ runs:
         branch: auto/django-mig-merge
         labels: ${{ inputs.labels }}
         reviewers: ${{ github.actor }}
-      working-directory: ${{github.action_path}}
     - name: Commit changes
       if:  ${{ inputs.strategy == 'push' }} 
       uses: stefanzweifel/git-auto-commit-action@v4
@@ -109,4 +107,3 @@ runs:
         commit_message: Automatic Django migration merge
         commit_user_name: Django Migration Guy
         commit_user_email: not-a-person@web.com
-      working-directory: ${{github.action_path}}
