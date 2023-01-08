@@ -23,16 +23,17 @@ def run():
         logger.info("No conflicts detected.")
         return
 
-    pr_message = ""
+    summary = ""
     for app, conflicts in res:
         logger.info(f"Conflicts in '{app}'. Merging leaves: {','.join(conflicts)}")
-        pr_message += f"Merged migrations of `{app}` app:\n"
-        pr_message += "\n".join([f"- {x}" for x in conflicts])
-        pr_message += "\n"
+        summary += f"Merged migrations of `{app}` app:\n"
+        summary += "\n".join([f"- {x}" for x in conflicts])
+        summary += "\n"
         filename = create_merge_migration_file(app, conflicts, APPS_PATH)
         logger.info(f"Created: {filename}")
 
-    github.add_output("pr_message", pr_message)
+    github.add_output("pr_message", summary)
+    github.add_summary(summary)
 
 
 if __name__ == "__main__":
