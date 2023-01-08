@@ -26,9 +26,11 @@ runs:
       id: fix-migrations
       run: poetry run python src/main.py
       shell: bash
-    - name: Commit changes
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Automatic Django migration merge
-        commit_user_name: Django Migration Guy
-        commit_user_email: not-a-person@web.com
+    - name: Create pull request
+      uses: peter-evans/create-pull-request@v4
+    # - name: Commit changes
+    #   uses: stefanzweifel/git-auto-commit-action@v4
+    #   with:
+    #     commit_message: Automatic Django migration merge
+    #     commit_user_name: Django Migration Guy
+    #     commit_user_email: not-a-person@web.com
