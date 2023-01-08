@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("someapp", "0002_question_new_field"),
+        ("someapp", "0001_initial"),
     ]
 
     operations = [
