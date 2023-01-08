@@ -25,6 +25,7 @@ runs:
     - name: Install poetry
       run: pipx install poetry
       shell: bash
+      working-directory: ${{github.action_path}}
     - name: Install python
       uses: actions/setup-python@v4
       with:
@@ -33,13 +34,15 @@ runs:
     - name: Install requirements
       run: poetry install --without dev --no-root
       shell: bash
+      working-directory: ${{github.action_path}}
     - name: Pass inputs to shell
-      run: echo "APPS_PATH=${{ inputs.apps_path }}" >> $GITHUB_ENV
+      run: echo "APPS_PATH=${{github.workspace}}/${{ inputs.apps_path }}" >> $GITHUB_ENV
       shell: bash
     - name: Fix migrations
       id: fix-migrations
       run: poetry run python src/main.py
       shell: bash
+      working-directory: ${{github.action_path}}
     - name: Create pull request
       if:  ${{ inputs.strategy == 'create_pr' }} 
       uses: peter-evans/create-pull-request@v4
