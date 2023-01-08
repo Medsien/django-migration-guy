@@ -64,8 +64,6 @@ runs:
     - name: list all
       shell: bash
       run: ls -lah && pwd
-    - uses: actions/checkout@v3
-      with: 
     - name: Install poetry
       run: pipx install poetry
       shell: bash
