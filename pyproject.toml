@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-migration-guy"
-version = "0.1.1"
+version = "0.1.3"
 description = "A GitHub action to automatically fix multiple leaf errors of Django migrations."
 authors = ["Ulaş Özgüler <ulasozguler@gmail.com>"]
 readme = "README.md"
