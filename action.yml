@@ -30,10 +30,6 @@ runs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
-    - name: Debugging
-      run: echo ${GITHUB_ACTION_PATH}
-      shell: bash
-      working-directory: ${{github.action_path}}
     - name: Install requirements
       run: poetry install --without dev --no-root
       shell: bash
